@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#1a0f00">
+<title>PetCare — Data Pemilik</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+:root{
+  --pr: #8e52fc; --sc: #d463f2; --pr-pale: #f4eeff; --sc-pale: #fbeeff; --pr-bg: #8e52fc;
+  --ink: #0f0a1a; --text: #1a0a2d; --muted: #6b5a8a; --border: #e8d9ff; --bg: #f9f6ff; --white: #fff;
+  --red: #ff4757; --red-p: #fff1f2; --green: #2ed573; --green-p: #f0fff4;
+  --blue: #1e90ff; --blue-p: #f0f8ff; --yellow: #ffa502; --yellow-p: #fff9e6;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;-webkit-tap-highlight-color:transparent;}
+html,body{width:100%;min-height:100%;}
+
+/* ─── MOBILE APP ─── */
+.app{width:100%;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--or-bg);}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.main-card{background:var(--bg);border-radius:28px 28px 0 0;flex:1;margin-top:14px;}
+
+/* ─── ADMIN LAYOUT ─── */
+.admin-body{display:flex;min-height:100vh;background:var(--bg);}
+.sidebar{width:260px;height:100vh;background:var(--ink);position:fixed;top:0;left:0;display:flex;flex-direction:column;z-index:100;}
+.main-admin{margin-left:260px;flex:1;display:flex;flex-direction:column;}
+.topbar{height:64px;background:var(--white);border-bottom:1.5px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.content{padding:24px 28px;}
+
+/* ─── SIDEBAR ─── */
+.sb-logo{padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;}
+.sb-logo-box{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--or2),var(--or));display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
+.sb-logo-name{font-weight:700;font-size:14px;color:#fff;}
+.sb-logo-sub{font-size:9px;color:var(--or2);text-transform:uppercase;letter-spacing:.6px;font-weight:600;}
+.sb-section{font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.28);font-weight:600;padding:14px 18px 6px;}
+.sb-nav{flex:1;padding:8px 10px;overflow-y:auto;}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,.62);text-decoration:none;font-size:13px;font-weight:500;margin-bottom:2px;border:1px solid transparent;transition:all .18s;cursor:pointer;}
+.ni:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);}
+.ni.active{background:rgba(142,82,252,0.15);color:var(--pr-pale);border-color:rgba(142,82,252,0.2);font-weight:600;}
+.ni svg{flex-shrink:0;width:17px;height:17px;}
+.ni-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:20px;}
+.sb-user{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;}
+.sb-ava{width:34px;height:34px;border-radius:10px;background:var(--pr-pale);display:flex;align-items:center;justify-content:center;color:var(--pr);flex-shrink:0;}
+.sb-uname{font-size:12px;font-weight:600;color:#fff;}
+.sb-urole{font-size:10px;color:var(--sc);}
+
+/* ─── TOPBAR ─── */
+.tb-title{font-weight:700;font-size:17px;color:var(--ink);}
+.tb-sub{font-size:11.5px;color:var(--muted);margin-top:1px;}
+.tb-right{display:flex;gap:10px;align-items:center;}
+.search-bar{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:8px 13px;width:220px;}
+.search-bar input{border:none;background:transparent;font-size:13px;color:var(--text);outline:none;width:100%;}
+.search-bar svg{color:var(--muted);flex-shrink:0;}
+
+/* ─── CARDS ─── */
+.card{background:var(--white);border-radius:14px;border:1.5px solid var(--border);}
+.card-head{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid var(--border);}
+.card-title{font-size:13.5px;font-weight:700;color:var(--ink);}
+.card-sub{font-size:11.5px;color:var(--muted);margin-top:1px;}
+
+/* ─── STAT CARDS ─── */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.stat-card{background:var(--white);border-radius:13px;padding:16px 18px;border:1.5px solid var(--border);position:relative;overflow:hidden;}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:13px 13px 0 0;}
+.s-or::before{background:linear-gradient(90deg,var(--or),var(--or2));}
+.s-red::before{background:linear-gradient(90deg,var(--red),#f06060);}
+.s-green::before{background:linear-gradient(90deg,var(--green),#5fc779);}
+.s-blue::before{background:linear-gradient(90deg,var(--blue),#74b9ff);}
+.stat-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.stat-val{font-size:26px;font-weight:800;color:var(--ink);}
+.stat-label{font-size:10.5px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.4px;}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:4px;}
+
+/* ─── TABLE ─── */
+table{width:100%;border-collapse:collapse;}
+thead th{padding:10px 14px;text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);font-weight:600;background:var(--bg);border-bottom:1.5px solid var(--border);}
+tbody tr{border-bottom:1px solid rgba(255,217,184,.4);transition:background .15s;cursor:pointer;}
+tbody tr:hover{background:var(--bg);}
+tbody tr:last-child{border:none;}
+td{padding:12px 14px;font-size:13px;vertical-align:middle;}
+
+/* ─── BUTTONS ─── */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:9px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;font-family:Poppins,sans-serif;transition:all .18s;text-decoration:none;}
+.btn-primary{background:var(--or);color:#fff;}
+.btn-primary:hover{background:var(--or2);}
+.btn-outline{background:transparent;color:var(--or);border:1.5px solid var(--border);}
+.btn-outline:hover{background:var(--or-pale);}
+.btn-sm{padding:5px 11px;font-size:11.5px;}
+.btn-full{width:100%;justify-content:center;}
+
+/* ─── BADGES ─── */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;}
+.b-red{background:var(--red-p);color:var(--red);}
+.b-green{background:var(--green-p);color:var(--green);}
+.b-orange{background:var(--or-pale);color:var(--or);}
+.b-blue{background:var(--blue-p);color:var(--blue);}
+.b-yellow{background:var(--yellow-p);color:var(--yellow);}
+.b-gray{background:#f3f4f6;color:#6b7280;}
+
+/* ─── FORM INPUTS ─── */
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;color:var(--text);background:var(--bg);outline:none;font-family:Poppins,sans-serif;transition:border-color .2s;}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--pr);background:var(--white);}
+.field input::placeholder,.field textarea::placeholder{color:#c4a882;}
+.input-wrap{position:relative;}
+.input-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);cursor:pointer;}
+
+/* ─── MOBILE BOTTOM NAV ─── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid rgba(0,0,0,.06);padding:8px 0 calc(env(safe-area-inset-bottom,0px)+8px);display:flex;align-items:flex-end;justify-content:space-around;z-index:200;box-shadow:0 -4px 24px rgba(0,0,0,.07);}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:3px 0;text-decoration:none;color:var(--muted);}
+.nav-tab svg{stroke:var(--muted);}
+.nav-tab span{font-size:10px;font-weight:700;}
+.nav-tab.active{color:var(--or);}
+.nav-tab.active svg{stroke:var(--or);}
+.nav-center{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;margin-top:-20px;text-decoration:none;}
+.nav-center-btn{width:52px;height:52px;background:linear-gradient(145deg,var(--or2),var(--or));border-radius:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(232,96,10,.38);border:3px solid var(--white);}
+.nav-center-btn svg{stroke:#fff;width:24px;height:24px;}
+.nav-center span{font-size:10px;font-weight:800;color:var(--or);}
+
+/* ─── MOBILE HEADER ─── */
+.mob-header{background:var(--or-bg);padding:calc(env(safe-area-inset-top,0px)+14px) 20px 20px;position:relative;overflow:hidden;flex-shrink:0;}
+.mob-header::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.16);}
+.mob-header::after{content:'';position:absolute;bottom:-30px;left:-30px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.12);}
+.header-top{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;}
+.page-title{font-size:21px;font-weight:800;color:#fff;position:relative;z-index:1;}
+.page-sub{font-size:12px;color:rgba(255,255,255,.7);margin-top:3px;position:relative;z-index:1;}
+.icon-btn{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.18);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.icon-btn svg{stroke:var(--or);}
+.hamburger svg{stroke:var(--or);}
+
+/* ─── TIMELINE ─── */
+.timeline-item{display:flex;gap:12px;padding-bottom:16px;position:relative;}
+.tl-line{position:absolute;left:14px;top:28px;bottom:0;width:2px;background:var(--border);}
+.tl-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;z-index:1;}
+.tl-content{flex:1;background:var(--bg);border-radius:11px;padding:11px 13px;border:1.5px solid var(--border);}
+
+/* ─── MISC ─── */
+.section-title{font-size:14px;font-weight:800;color:var(--ink);margin-bottom:12px;}
+.divider{height:1px;background:var(--border);margin:16px 0;}
+.toggle{width:38px;height:22px;border-radius:20px;position:relative;cursor:pointer;flex-shrink:0;transition:background .2s;}
+.toggle.on{background:var(--or);}
+.toggle.off{background:#d1d5db;}
+.toggle-knob{width:16px;height:16px;border-radius:50%;background:#fff;position:absolute;top:3px;transition:all .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+.toggle.on .toggle-knob{right:3px;}
+.toggle.off .toggle-knob{left:3px;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .3s;}
+  .sidebar.open{transform:translateX(0);}
+  .main-admin{margin-left:0;}
+  .stats-grid{grid-template-columns:1fr 1fr!important;gap:10px!important;}
+  .content{padding:14px!important;}
+  .hamburger{display:flex!important;}
+}
+</style>
+</head>
+<body>
+<div class="admin-body">
+<aside class="sidebar" id="sidebar">
+<div class="sb-logo">
+  <div class="sb-logo-box" style="background:linear-gradient(135deg,var(--sc),var(--pr));"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 3.33-1 4.5s3.24.5 4.5-1M19.5 16.5c1.5 1.26 2 3.33 1 4.5s-3.24.5-4.5-1M12 18c-2.5 0-4.5 2-4.5 4.5S9.5 27 12 27s4.5-2 4.5-4.5S14.5 18 12 18z"/><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="11" r="3"/></svg></div>
+  <div><div class="sb-logo-name" style="color:#fff;font-weight:700;">PetCare</div><div class="sb-logo-sub" style="color:var(--sc);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Smart Clinic</div></div>
+</div>
+<div class="sb-nav">
+  <a href="beranda-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Beranda</a>
+  <a href="manajemen-pasien.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Manajemen Pasien</a>
+  <a href="rekam-medis-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Riwayat Medis</a>
+  <a href="data-pemilik.html" class="ni active" style="background:rgba(142,82,252,0.15);color:var(--pr-pale);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Data Pemilik</a>
+  <a href="stok-vaksin-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5l10-10a4.95 4.95 0 0 0 0-7 4.95 4.95 0 0 0-7 0l-10 10a4.95 4.95 0 0 0 0 7 4.95 4.95 0 0 0 7 0z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg> Stok Vaksin</a>
+  <a href="reminder-ai.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Reminder AI</a>
+  <a href="pengaturan-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Pengaturan</a>
+</div>
+<div class="sb-user">
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="sb-ava" style="background:var(--pr-pale);color:var(--pr);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div><div class="sb-uname" id="side-name">drh. Andi Pratama</div><div class="sb-urole" id="side-role" style="color:var(--sc);">Admin Utama</div></div>
+  </div>
+  <a href="index.html" style="color:var(--red);margin-left:auto;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+</div></aside>
+<div class="main-admin">
+<div class="topbar">
+  <button class="icon-btn hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none;background:var(--pr-pale);border:1.5px solid var(--border);border-radius:9px;width:36px;height:36px;cursor:pointer;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <div><div class="tb-title">Data Pemilik</div><div class="tb-sub">Semua pemilik hewan terdaftar</div></div>
+  <div class="tb-right">
+    <div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Cari..."></div>
+  </div>
+</div>
+<div class="content"><div class="card">
+  <div class="card-head">
+    <div><div class="card-title">Daftar Pemilik Hewan</div><div class="card-sub">6 pemilik terdaftar</div></div>
+    <div style="display:flex;gap:8px">
+      <div class="search-bar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Cari pemilik..."></div>
+      <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Tambah Pemilik</button>
+    </div>
+  </div>
+  <div style="overflow-x:auto"><table>
+    <thead><tr><th>Nama Pemilik</th><th>No. WhatsApp</th><th>Email</th><th>Kota</th><th>Hewan</th><th>Aksi</th></tr></thead>
+    <tbody><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Siti Rahayu</div>
+  </div></td>
+  <td style="font-size:12.5px">081234567</td>
+  <td style="font-size:12px;color:var(--muted)">siti@email.com</td>
+  <td style="font-size:12.5px">Surabaya</td>
+  <td><span class="badge b-pink">Luna (Kucing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Rudi Santoso</div>
+  </div></td>
+  <td style="font-size:12.5px">082345678</td>
+  <td style="font-size:12px;color:var(--muted)">rudi@email.com</td>
+  <td style="font-size:12.5px">Bandung</td>
+  <td><span class="badge b-pink">Buddy (Anjing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Adi Nugroho</div>
+  </div></td>
+  <td style="font-size:12.5px">083456789</td>
+  <td style="font-size:12px;color:var(--muted)">adi@email.com</td>
+  <td style="font-size:12.5px">Jakarta</td>
+  <td><span class="badge b-pink">Coki (Anjing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Hana Putri</div>
+  </div></td>
+  <td style="font-size:12.5px">084567890</td>
+  <td style="font-size:12px;color:var(--muted)">hana@email.com</td>
+  <td style="font-size:12.5px">Surabaya</td>
+  <td><span class="badge b-pink">Mochi (Kucing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Joko Susilo</div>
+  </div></td>
+  <td style="font-size:12.5px">085678901</td>
+  <td style="font-size:12px;color:var(--muted)">joko@email.com</td>
+  <td style="font-size:12.5px">Malang</td>
+  <td><span class="badge b-pink">Max (Anjing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr><tr>
+  <td><div style="display:flex;align-items:center;gap:9px">
+    <div style="width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div style="font-weight:700">Dewi Lestari</div>
+  </div></td>
+  <td style="font-size:12.5px">086789012</td>
+  <td style="font-size:12px;color:var(--muted)">dewi@email.com</td>
+  <td style="font-size:12.5px">Surabaya</td>
+  <td><span class="badge b-pink">Kopi (Kucing)</span></td>
+  <td><button class="btn btn-outline btn-sm">Detail</button></td>
+</tr></tbody>
+  </table></div>
+</div></div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const user = JSON.parse(localStorage.getItem('petcare_user'));
+  if(user){
+    if(document.getElementById('side-name')) document.getElementById('side-name').innerText = user.name;
+    if(document.getElementById('side-role')) document.getElementById('side-role').innerText = user.role;
+  }
+});
+document.addEventListener('click',function(e){
+  var sb=document.getElementById('sidebar');
+  if(sb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!e.target.closest('.hamburger'))
+    sb.classList.remove('open');
+});
+</script>
+</body></html>

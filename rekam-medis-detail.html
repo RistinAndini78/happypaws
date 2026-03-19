@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#8e52fc">
+<title>PetCare — Detail Riwayat Medis</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{
+  --pr: #8e52fc; --sc: #d463f2; --pr-pale: #f4eeff; --sc-pale: #fbeeff;
+  --bg: #f9f6ff; --white: #fff; --text: #1a0a2d; --muted: #6b5a8a;
+  --red: #ff4757; --red-p: #fff1f2; --green: #2ed573; --green-p: #f0fff4;
+}
+.app { background: var(--bg); }
+.header {
+  padding: 50px 20px 20px;
+  background: #fff;
+  display: flex; align-items: center; gap: 16px;
+  border-bottom: 1.5px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+}
+.back-btn {
+  width: 40px; height: 40px; border-radius: 12px; background: var(--pr-pale);
+  display: flex; align-items: center; justify-content: center; color: var(--pr);
+}
+.header-title { font-size: 18px; font-weight: 800; color: var(--text); }
+
+.pet-summary {
+  margin: 20px; padding: 20px; background: linear-gradient(135deg, var(--pr), var(--sc));
+  border-radius: 24px; color: #fff; display: flex; align-items: center; gap: 16px;
+  box-shadow: 0 10px 25px rgba(142, 82, 252, 0.2);
+}
+.pet-ava { width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 30px; border: 2px solid rgba(255,255,255,0.4); }
+
+.timeline { padding: 0 24px 40px; position: relative; }
+.timeline::before {
+  content: ''; position: absolute; left: 33px; top: 20px; bottom: 0;
+  width: 2px; background: var(--border);
+}
+
+.tl-item { display: flex; gap: 20px; margin-bottom: 30px; position: relative; }
+.tl-dot {
+  width: 20px; height: 20px; border-radius: 50%; background: #fff;
+  border: 4px solid var(--border); z-index: 1; flex-shrink: 0; margin-left: 2px;
+}
+.tl-item.upcoming .tl-dot { border-color: var(--pr); background: var(--pr); box-shadow: 0 0 0 4px var(--pr-pale); }
+.tl-content { flex:1; background: #fff; padding: 16px; border-radius: 18px; border: 1.5px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+
+.tl-date { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 4px; text-transform: uppercase; }
+.tl-title { font-size: 15px; font-weight: 800; color: var(--text); }
+.tl-doctor { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; align-items: center; gap: 4px; }
+.tl-action { font-size: 13px; color: var(--text); margin-top: 8px; font-weight: 500; }
+
+.upcoming-badge {
+  display: inline-block; padding: 4px 10px; background: var(--pr-pale);
+  color: var(--pr); border-radius: 10px; font-size: 10px; font-weight: 800; margin-bottom: 8px;
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <a href="beranda.html" class="back-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></a>
+    <div class="header-title">Riwayat Medis</div>
+  </header>
+
+  <div class="scroll">
+    <div class="pet-summary">
+      <div class="pet-ava">🐱</div>
+      <div>
+        <div style="font-size:18px;font-weight:800;">Luna</div>
+        <div style="font-size:12px;opacity:0.8;">Kucing Persia · 2 Tahun</div>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <!-- Upcoming -->
+      <div class="tl-item upcoming">
+        <div class="tl-dot"></div>
+        <div class="tl-content" style="border: 2px solid var(--pr);">
+          <div class="upcoming-badge">JADWAL BERIKUTNYA</div>
+          <div class="tl-date">12 Desember 2026</div>
+          <div class="tl-title">Vaksin Tahunan Rabies</div>
+          <div class="tl-action">Dihitung otomatis oleh sistem 🤖</div>
+        </div>
+      </div>
+
+      <!-- History 1 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">18 Maret 2026</div>
+          <div class="tl-title">Vaksin FVRCP (Mandatory)</div>
+          <div class="tl-doctor">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            drh. Andi Pratama
+          </div>
+          <div class="tl-action">Tindakan: Pemberian Dosis ke-2</div>
+        </div>
+      </div>
+
+      <!-- History 2 -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <div class="tl-date">5 Maret 2026</div>
+          <div class="tl-title">Check-up & Obat Cacing</div>
+          <div class="tl-doctor">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            drh. Andi Pratama
+          </div>
+          <div class="tl-action">Tindakan: Pemeriksaan fisik & Drontal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="bottom-nav">
+    <a href="beranda.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      <span>Beranda</span>
+    </a>
+    <a href="rekam-medis-detail.html" class="nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Riwayat</span>
+    </a>
+    <a href="booking.html" class="nav-center">
+      <div class="nav-center-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <span>Booking</span>
+    </a>
+    <a href="konsultasi.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Konsul</span>
+    </a>
+    <a href="profil-user.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profil</span>
+    </a>
+  </nav>
+</div>
+</body>
+</html>

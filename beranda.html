@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#d463f2">
+<title>PetCare — Beranda</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{
+  --pr: #8e52fc; --sc: #d463f2; --pr-pale: #f4eeff; --sc-pale: #fbeeff;
+  --bg: #f9f6ff; --white: #fff; --text: #1a0a2d; --muted: #6b5a8a;
+  --red: #ff4757; --red-p: #fff1f2; --green: #2ed573; --green-p: #f0fff4; --yellow: #ffa502; --yellow-p: #fff9e6;
+}
+.app { background: var(--bg); }
+.header {
+  padding: 60px 24px 30px;
+  background: linear-gradient(135deg, var(--sc), var(--pr));
+  border-radius: 0 0 32px 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(142, 82, 252, 0.15);
+}
+.greeting { font-size: 14px; opacity: 0.9; }
+.user-name { font-size: 24px; font-weight: 800; }
+.notif-btn {
+  width: 44px; height: 44px; background: rgba(255,255,255,0.2);
+  border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.notif-dot {
+  position: absolute; top: 10px; right: 10px; width: 8px; height: 8px;
+  background: var(--red); border-radius: 50%; border: 2px solid #fff;
+}
+
+.section-label { font-size: 16px; font-weight: 800; color: var(--text); padding: 0 24px; margin-bottom: 16px; }
+.pet-swiper {
+  display: flex; gap: 16px; overflow-x: auto; padding: 10px 24px 24px;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.pet-swiper::-webkit-scrollbar { display: none; }
+
+.pet-card {
+  flex-shrink: 0; width: 160px; background: #fff; border-radius: 24px;
+  padding: 20px 16px; text-align: center;
+  box-shadow: 0 8px 20px rgba(142, 82, 252, 0.05);
+  border: 1.5px solid var(--border);
+  position: relative;
+  transition: transform 0.2s;
+}
+.pet-card:active { transform: scale(0.96); }
+.pet-photo {
+  width: 70px; height: 70px; border-radius: 50%; background: var(--pr-pale);
+  margin: 0 auto 12px; border: 3px solid #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  display: flex; align-items: center; justify-content: center; font-size: 32px;
+}
+.pet-name { font-size: 16px; font-weight: 700; color: var(--text); }
+.pet-breed { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+.status-badge {
+  position: absolute; top: -8px; right: -8px;
+  padding: 4px 10px; border-radius: 12px; font-size: 9px; font-weight: 800;
+  color: #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+.b-red { background: var(--red); }
+.b-yellow { background: var(--yellow); }
+.b-green { background: var(--green); }
+
+.quick-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 0 24px; }
+.menu-item {
+  background: #fff; padding: 16px; border-radius: 20px;
+  display: flex; flex-direction: column; gap: 8px;
+  border: 1.5px solid var(--border);
+}
+.menu-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.menu-label { font-size: 13px; font-weight: 700; color: var(--text); }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div>
+      <div class="greeting">Halo,</div>
+      <div class="user-name">Siti Rahayu!</div>
+    </div>
+    <div class="notif-btn">
+      <div class="notif-dot"></div>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+  </header>
+
+  <div class="scroll" style="padding-top:24px;">
+    <div class="section-label">Hewan Peliharaan</div>
+    <div class="pet-swiper">
+      <!-- Card Luna -->
+      <div class="pet-card" onclick="window.location.href='rekam-medis-detail.html'">
+        <div class="status-badge b-red">Segera Vaksin! Terlambat 3 Hari</div>
+        <div class="pet-photo">🐱</div>
+        <div class="pet-name">Luna</div>
+        <div class="pet-breed">Kucing Persia</div>
+      </div>
+      <!-- Card Coki -->
+      <div class="pet-card" onclick="window.location.href='rekam-medis-detail.html'">
+        <div class="status-badge b-yellow">Jadwal Vaksin H-7</div>
+        <div class="pet-photo">🐶</div>
+        <div class="pet-name">Coki</div>
+        <div class="pet-breed">Anjing Pomeranian</div>
+      </div>
+      <!-- Card Mochi -->
+      <div class="pet-card" onclick="window.location.href='rekam-medis-detail.html'">
+        <div class="status-badge b-green">Kondisi Aman</div>
+        <div class="pet-photo">🐰</div>
+        <div class="pet-name">Mochi</div>
+        <div class="pet-breed">Kelinci Rex</div>
+      </div>
+    </div>
+
+    <div class="section-label">Menu Cepat</div>
+    <div class="quick-menu">
+      <div class="menu-item" onclick="window.location.href='booking.html'">
+        <div class="menu-icon" style="background:var(--pr-pale);color:var(--pr)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="menu-label">Booking Vaksin</div>
+      </div>
+      <div class="menu-item" onclick="window.location.href='konsultasi.html'">
+        <div class="menu-icon" style="background:var(--sc-pale);color:var(--sc)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="menu-label">Konsultasi</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="beranda.html" class="nav-item active">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+      <span>Beranda</span>
+    </a>
+    <a href="rekam-medis-detail.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span>Riwayat</span>
+    </a>
+    <a href="booking.html" class="nav-center">
+      <div class="nav-center-btn">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <span>Booking</span>
+    </a>
+    <a href="konsultasi.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <span>Konsul</span>
+    </a>
+    <a href="profil-user.html" class="nav-item">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span>Profil</span>
+    </a>
+  </nav>
+</div>
+</body>
+</html>
