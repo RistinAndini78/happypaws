@@ -155,6 +155,8 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   .hamburger{display:flex!important;}
 }
 </style>
+<link rel="stylesheet" href="shared.css">
+<script src="shared.js" defer></script>
 </head>
 <body>
 <div class="admin-body">
@@ -184,7 +186,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   <button class="icon-btn hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none;background:var(--pr-pale);border:1.5px solid var(--border);border-radius:9px;width:36px;height:36px;cursor:pointer;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <div><div class="tb-title">Rekam Medis Digital</div><div class="tb-sub">Riwayat kesehatan semua pasien</div></div>
   <div class="tb-right">
-    <div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Cari..."></div>
+    <div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="rm-search-top" placeholder="Cari rekam medis..." onkeyup="filterRMSidebar()"></div>
   </div>
 </div>
 <div class="content"><div style="display:grid;grid-template-columns:280px 1fr;gap:18px;align-items:start">
@@ -192,7 +194,8 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
     <div class="card-head"><div class="card-title">Pilih Pasien</div></div>
     <div style="padding:10px">
       <div style="display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;margin-bottom:6px">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Cari..." style="border:none;background:transparent;font-size:13px;outline:none;width:100%;font-family:Poppins,sans-serif">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="patient-search-side" placeholder="Cari..." onkeyup="filterRMSidebar()" style="border:none;background:transparent;font-size:13px;outline:none;width:100%;font-family:Poppins,sans-serif">
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid rgba(255,217,184,.4);cursor:pointer;background:var(--pr-pale);transition:background .15s" onmouseover="this.style.background='var(--bg)'" onmouseout="this.style.background='var(--pr-pale)'">
@@ -223,19 +226,33 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   </div>
   <div>
     <div class="card" style="margin-bottom:14px">
-      <div style="background:linear-gradient(135deg,var(--ink),var(--pr));padding:20px 22px;display:flex;align-items:center;gap:14px;border-radius:13px 13px 0 0">
-        <div style="width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5C7.58 5 4 8.13 4 12c0 3.87 3.58 7 8 7s8-3.13 8-7c0-3.87-3.58-7-8-7z"/><path d="M4 5L2 2M20 5l2-2"/><path d="M9 13.5c.5.5 1.5.5 2 0M13 13.5c.5.5 1.5.5 2 0"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg></div>
-        <div style="flex:1">
-          <div style="font-size:18px;font-weight:800;color:#fff">Luna</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.55)">Kucing Persia Mix · Betina · 2 Tahun · 3.8 kg</div>
-          <div style="margin-top:8px;display:flex;gap:8px">
-            <span style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px">PCR-0021</span>
-            <span class="badge b-red">Vaksin Terlambat</span>
+      <div style="background: linear-gradient(90deg, #1a0f2e 0%, #4a2b8e 100%); padding: 20px 24px; display: flex; align-items: center; gap: 18px; border-radius: 16px 16px 0 0; box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);">
+        <div style="width: 58px; height: 58px; border-radius: 14px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.95);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5C7.58 5 4 8.13 4 12c0 3.87 3.58 7 8 7s8-3.13 8-7c0-3.87-3.58-7-8-7z"/>
+            <circle cx="9" cy="10" r="1.5" fill="currentColor"/>
+            <circle cx="15" cy="10" r="1.5" fill="currentColor"/>
+            <path d="M16 3l1.5 2.5"/>
+            <path d="M8 3L6.5 5.5"/>
+          </svg>
+        </div>
+        <div style="flex: 1;">
+          <div style="font-size: 20px; font-weight: 800; color: #fff; letter-spacing: -0.3px;">Luna</div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 1px; font-weight: 500;">Kucing Persia Mix · Betina · 2 Tahun · 3.8 kg</div>
+          <div style="margin-top: 10px; display: flex; gap: 8px; align-items: center;">
+            <span style="background: rgba(45, 27, 80, 0.6); color: rgba(255,255,255,0.8); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">PCR-0021</span>
+            <span style="background: #fff; color: var(--red); font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px;">Vaksin Terlambat</span>
           </div>
         </div>
-        <div style="display:flex;gap:8px">
-          <button class="btn btn-outline" style="background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit</button>
-          <button class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Tambah Entri</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-outline" style="background: rgba(255,255,255,0.05); color: #fff; border-color: rgba(255,255,255,0.15); border-radius: 12px; padding: 10px 18px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit
+          </button>
+          <button class="btn" style="background: linear-gradient(135deg, #a855f7 0%, #d946ef 100%); color: #fff; border: none; border-radius: 12px; padding: 10px 20px; font-weight: 700; box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);" onclick="HappyPaws.showModal('Tambah Entri Medis - Luna', '<div class=\'field\'><label>Tanggal</label><input type=\'date\' value=\'2026-03-23\'></div><div class=\'field\'><label>Tindakan</label><input type=\'text\' placeholder=\'Contoh: Vaksin Tahunan\'></div><div class=\'field\'><label>Catatan</label><textarea placeholder=\'Detail hasil pemeriksaan...\'></textarea></div><button class=\'btn-primary\' style=\'margin-top:20px;\' onclick=\'HappyPaws.showToast(\'Entri baru berhasil disimpan\'); HappyPaws.closeModal();\'>Simpan Entri</button>')">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 4px;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Tambah Entri
+          </button>
         </div>
       </div>
     </div>
@@ -244,7 +261,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
         <button class="btn btn-outline"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export</button></div>
       <div style="padding:18px"><div class="timeline-item">
   <div class="tl-line"></div>
-  <div class="tl-dot" style="background:var(--green-p);border:2px solid var(--green);color:var(--green)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></div>
+  <div class="tl-dot" style="background:var(--pr-pale);border:2px solid var(--pr);color:var(--ink)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg></div>
   <div class="tl-content">
     <div style="font-size:13px;font-weight:700">Vaksin FVRCP</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">5 Mar 2026 · drh. Andi Pratama</div>
@@ -252,7 +269,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   </div>
 </div><div class="timeline-item">
   <div class="tl-line"></div>
-  <div class="tl-dot" style="background:var(--blue-p);border:2px solid var(--blue);color:var(--blue)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5c0 3.87 3.13 7 7 7a7 7 0 007-7V5.5a1 1 0 00-1-1h-2a1 1 0 00-1 1V7"/><path d="M4.5 12.5V8.5a1 1 0 011-1h2a1 1 0 011 1v4"/><path d="M18.5 12.5v4a2.5 2.5 0 005 0"/><circle cx="21" cy="13.5" r="1"/></svg></div>
+  <div class="tl-dot" style="background:var(--bg);border:2px solid var(--border);color:var(--ink)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12.5c0 3.87 3.13 7 7 7a7 7 0 007-7V5.5a1 1 0 00-1-1h-2a1 1 0 00-1 1V7"/><path d="M4.5 12.5V8.5a1 1 0 011-1h2a1 1 0 011 1v4"/><path d="M18.5 12.5v4a2.5 2.5 0 005 0"/><circle cx="21" cy="13.5" r="1"/></svg></div>
   <div class="tl-content">
     <div style="font-size:13px;font-weight:700">Pemeriksaan Rutin</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">20 Jan 2026 · drh. Andi Pratama</div>
@@ -260,7 +277,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   </div>
 </div><div class="timeline-item">
   <div class="tl-line"></div>
-  <div class="tl-dot" style="background:var(--green-p);border:2px solid var(--green);color:var(--green)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="17.5" r="2.5"/><path d="M17 4l3 3-7 7-3-3z"/><path d="M14.5 5.5l3 3"/></svg></div>
+  <div class="tl-dot" style="background:var(--pr-pale);border:2px solid var(--pr);color:var(--ink)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="17.5" r="2.5"/><path d="M17 4l3 3-7 7-3-3z"/><path d="M14.5 5.5l3 3"/></svg></div>
   <div class="tl-content">
     <div style="font-size:13px;font-weight:700">Vaksin Rabies</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">5 Nov 2025 · drh. Andi Pratama</div>
@@ -268,7 +285,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   </div>
 </div><div class="timeline-item">
   
-  <div class="tl-dot" style="background:var(--or-pale);border:2px solid var(--sc);color:var(--sc)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+  <div class="tl-dot" style="background:var(--bg);border:2px solid var(--border);color:var(--ink)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
   <div class="tl-content">
     <div style="font-size:13px;font-weight:700">Dermatitis Alergi</div>
     <div style="font-size:11px;color:var(--muted);margin-top:2px">3 Agu 2025 · drh. Andi Pratama</div>
@@ -288,10 +305,13 @@ document.addEventListener('DOMContentLoaded', function(){
     if(document.getElementById('side-role')) document.getElementById('side-role').innerText = user.role;
   }
 });
-document.addEventListener('click',function(e){
-  var sb=document.getElementById('sidebar');
-  if(sb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!e.target.closest('.hamburger'))
-    sb.classList.remove('open');
-});
+function filterRMSidebar() {
+  const query = (document.getElementById('patient-search-side').value || document.getElementById('rm-search-top').value).toLowerCase();
+  const items = document.querySelectorAll('.card > div[style*="cursor:pointer"]');
+  items.forEach(item => {
+    const text = item.innerText.toLowerCase();
+    item.style.display = text.includes(query) ? 'flex' : 'none';
+  });
+}
 </script>
 </body></html>

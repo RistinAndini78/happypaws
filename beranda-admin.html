@@ -155,6 +155,8 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   .hamburger{display:flex!important;}
 }
 </style>
+<link rel="stylesheet" href="shared.css">
+<script src="shared.js" defer></script>
 </head>
 <body>
 <div class="admin-body">
@@ -176,6 +178,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   <div style="display:flex;align-items:center;gap:10px;">
     <div class="sb-ava" style="width:34px;height:34px;border-radius:10px;background:var(--pr-pale);display:flex;align-items:center;justify-content:center;color:var(--pr);flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
     <div><div class="sb-uname" id="side-name" style="font-size:12px;font-weight:600;color:#fff;">drh. Andi Pratama</div><div class="sb-urole" id="side-role" style="font-size:10px;color:var(--sc);">Admin Utama</div></div>
+    <a href="beranda.html" title="Lihat View Pemilik" style="margin-left:8px; color:var(--muted);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></a>
   </div>
   <a href="index.html" style="color:var(--red);margin-left:auto;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
 </div></aside>
@@ -184,15 +187,18 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   <button class="icon-btn hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none;background:var(--pr-pale);border:1.5px solid var(--border);border-radius:9px;width:36px;height:36px;cursor:pointer;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
   <div><div class="tb-title">Dashboard Utama</div><div class="tb-sub" id="top-name">drh. Andi Pratama</div></div>
   <div class="tb-right">
-    <div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" placeholder="Cari nama pasien..."></div>
-    <div class="sb-ava" style="margin-left:12px;cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+    <div class="search-bar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="admin-search" placeholder="Cari nama pasien..." onkeyup="filterPatientTable()"></div>
+    <div class="sb-ava" style="margin-left:12px;cursor:pointer;" onclick="HappyPaws.showModal('Profil Admin', '<div style=\'text-align:center;\'><div style=\'width:80px; height:80px; border-radius:50%; background:var(--pr-pale); margin:0 auto 12px; display:flex; align-items:center; justify-content:center; color:var(--pr);\'><svg width=\'40\' height=\'40\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\'/><circle cx=\'12\' cy=\'7\' r=\'4\'/></svg></div><h3 style=\'color:var(--pr);\'>drh. Andi Pratama</h3><p>Admin Utama PetCare</p></div>')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
   </div>
 </div>
 <div class="content">
-<div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+<div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
 <div class="stat-card" style="border-top: 4px solid var(--pr);"><div class="stat-label">Total Pasien</div><div class="stat-val">150</div><div class="stat-sub">+12 bulan ini</div></div>
-<div class="stat-card" style="border-top: 4px solid var(--red);"><div class="stat-label">Jatuh Tempo Hari Ini</div><div class="stat-val">5</div><div class="stat-sub">Rabies & DHPPI</div></div>
-<div class="stat-card" style="border-top: 4px solid var(--green);"><div class="stat-label">Pesan WA Terkirim</div><div class="stat-val">12</div><div class="stat-sub">94% tingkat baca</div></div>
+<div class="stat-card" style="border-top: 4px solid var(--red);"><div class="stat-label">Jatuh Tempo</div><div class="stat-val">5</div><div class="stat-sub">Hari ini</div></div>
+<div class="stat-card" style="grid-column: span 2; border-top: 4px solid var(--green); padding: 12px 18px;">
+  <div class="stat-label">Kunjungan Bulanan</div>
+  <div id="admin-chart" style="height: 60px;"></div>
+</div>
 </div>
 <div class="card" style="grid-column: span 2;">
     <div class="card-head"><div><div class="card-title">Jadwal Perawatan & Antrean</div></div>
@@ -207,8 +213,8 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
           <td>Vaksin Rabies</td>
           <td><span class="badge b-orange">Belum Datang</span></td>
           <td style="text-align:right">
-            <button class="btn btn-sm" style="background:var(--green-p);color:var(--green);border:none;margin-right:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
-            <button class="btn btn-sm" style="background:var(--pr-pale);color:var(--pr);border:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+            <button class="btn btn-sm" onclick="HappyPaws.showToast('Pesan WhatsApp terkirim ke pemilik pasien', 'success')" style="background:var(--green-p);color:var(--green);border:none;margin-right:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+            <button class="btn btn-sm" onclick="HappyPaws.showModal('Edit Data Pasien', '<div class=\'field\'><label>Nama Hewan</label><input type=\'text\' value=\'Pasien\'></div><div class=\'field\' style=\'margin-top:10px;\'><label>Tindakan</label><input type=\'text\' value=\'Pemeriksaan\'></div><button class=\'btn-primary\' style=\'margin-top:20px;\' onclick=\'HappyPaws.showToast(\'Data berhasil diperbarui\'); HappyPaws.closeModal();\'>Simpan Data</button>')" style="background:var(--pr-pale);color:var(--pr);border:none;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
           </td>
         </tr>
         <tr>
@@ -249,7 +255,7 @@ td{padding:12px 14px;font-size:13px;vertical-align:middle;}
   <span style="font-size:11px;font-weight:700;color:#27ae60;white-space:nowrap">3 bln</span>
 </div>
     <div style="padding:14px 16px;border-top:1.5px solid var(--border)">
-      <button class="btn btn-primary btn-full"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg> Kirim Semua Reminder</button>
+      <button class="btn btn-primary btn-full" onclick="HappyPaws.showToast('Sedang mengirim 5 reminder ke WhatsApp pemilik...', 'success')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg> Kirim Semua Reminder</button>
     </div>
   </div>
 </div></div>
@@ -264,6 +270,20 @@ document.addEventListener('DOMContentLoaded', function(){
     if(document.getElementById('top-name')) document.getElementById('top-name').innerText = user.name;
   }
 });
+
+function filterPatientTable() {
+  const query = document.getElementById('admin-search').value.toLowerCase();
+  const rows = document.querySelectorAll('tbody tr');
+  rows.forEach(row => {
+    const text = row.innerText.toLowerCase();
+    row.style.display = text.includes(query) ? '' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  HappyPaws.createChart('admin-chart', [30, 45, 60, 40, 80], ['Sen', 'Sel', 'Rab', 'Kam', 'Jum']);
+});
+
 document.addEventListener('click',function(e){
   var sb=document.getElementById('sidebar');
   if(sb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!e.target.closest('.hamburger'))

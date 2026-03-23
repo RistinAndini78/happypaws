@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta name="theme-color" content="#1a0f00">
-<title>PetCare — Manajemen Pasien</title>
+<title>PetCare — Tambah Pasien Baru</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
 <style>
@@ -35,41 +35,31 @@ html,body{width:100%;min-height:100%;background:var(--bg);}
 .sb-uname{font-size:12px;font-weight:600;color:#fff;}
 .sb-urole{font-size:10px;color:var(--sc);}
 
-/* MAIN CONTENT */
+/* CONTENT MASTER */
 .main-admin{margin-left:260px;flex:1;display:flex;flex-direction:column;}
 .topbar{height:64px;background:var(--white);border-bottom:1.5px solid var(--border);padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
-.content{padding:24px 28px;}
+.content{padding:24px 28px;max-width:900px;}
 
-/* STAT CARDS */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px;}
-.stat-card{background:var(--white);border-radius:14px;padding:18px;border:1.5px solid var(--border);position:relative;overflow:hidden;}
-.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--pr);}
-.s-red::before{background:var(--red);}
-.s-blue::before{background:var(--blue);}
-.stat-val{font-size:24px;font-weight:800;color:var(--ink);}
-.stat-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;margin-bottom:20px;}
+.card-head{padding:16px 20px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:10px;}
+.card-title{font-weight:800;font-size:15px;color:var(--ink);}
 
-/* TABLE UI */
-.card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;}
-.card-head{padding:16px 20px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
-.card-title{font-weight:800;font-size:15px;}
-table{width:100%;border-collapse:collapse;}
-th{text-align:left;padding:12px 20px;font-size:11px;text-transform:uppercase;color:var(--muted);background:var(--bg);border-bottom:1.5px solid var(--border);}
-td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--border);}
-.badge{padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;}
-.b-red{background:var(--red-p);color:var(--red);}
-.b-green{background:var(--green-p);color:var(--green);}
-.b-orange{background:var(--yellow-p);color:var(--yellow);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:24px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:var(--muted);}
+.field input, .field select, .field textarea{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg);outline:none;transition:all .2s;}
+.field input:focus{border-color:var(--pr);background:var(--white);}
 
-.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .2s;text-decoration:none;}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all .2s;text-decoration:none;}
 .btn-primary{background:var(--pr);color:#fff;}
 .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--muted);}
 
-.search-bar{display:flex;align-items:center;gap:8px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;width:240px;}
-.search-bar input{border:none;background:transparent;font-size:13px;outline:none;width:100%;}
-
-@media(max-width:1024px){ .stats-grid{grid-template-columns:1fr 1fr;} }
-@media(max-width:768px){ .main-admin{margin-left:0;} .sidebar{transform:translateX(-100%)} .sidebar.open{transform:translateX(0)} }
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .3s;}
+  .sidebar.open{transform:translateX(0);}
+  .main-admin{margin-left:0;}
+  .form-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -100,67 +90,52 @@ td{padding:14px 20px;font-size:13px;border-bottom:1px solid var(--border);}
   <main class="main-admin">
     <header class="topbar">
       <div style="display:flex; align-items:center; gap:16px;">
-        <button class="btn btn-outline btn-sm hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')" style="display:none; padding:8px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-        <div><h1 style="font-size:17px; font-weight:700;">Manajemen Pasien</h1><p style="font-size:11.5px; color:var(--muted);">Kelola data hewan dan pemilik</p></div>
+        <a href="manajemen-pasien.html" class="btn btn-outline btn-sm" style="padding:8px;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Kembali</a>
+        <div><h1 style="font-size:17px; font-weight:700;">Tambah Pasien Baru</h1><p style="font-size:11.5px; color:var(--muted);">Daftarkan hewan peliharaan ke sistem</p></div>
       </div>
-      <div class="search-bar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" placeholder="Cari nama/pemilik...">
-      </div>
+      <div class="sb-ava" style="cursor:pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
     </header>
 
     <div class="content">
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-label">Total Pasien</div>
-          <div class="stat-val">248</div>
-        </div>
-        <div class="stat-card s-red">
-          <div class="stat-label">Vaksin Terlambat</div>
-          <div class="stat-val">6</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-label">Vaksin Segera</div>
-          <div class="stat-val">11</div>
-        </div>
-        <div class="stat-card s-blue">
-          <div class="stat-label">Kunjungan Baru</div>
-          <div class="stat-val">89</div>
+      <div class="card">
+        <div class="card-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2.5"><path d="M12 5C7.58 5 4 8.13 4 12c0 3.87 3.58 7 8 7s8-3.13 8-7c0-3.87-3.58-7-8-7z"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg><h3 class="card-title">Informasi Hewan</h3></div>
+        <div class="form-grid">
+          <div class="field"><label>Nama Hewan</label><input type="text" placeholder="Masukkan nama hewan"></div>
+          <div class="field"><label>Jenis Hewan</label>
+            <select>
+              <option value="">Pilih Jenis</option>
+              <option>Kucing</option>
+              <option>Anjing</option>
+              <option>Burung</option>
+              <option>Lainnya</option>
+            </select>
+          </div>
+          <div class="field"><label>Ras / Breed</label><input type="text" placeholder="Contoh: Persia / Golden Retriever"></div>
+          <div class="field"><label>Tanggal Lahir / Umur</label><input type="date"></div>
+          <div class="field"><label>Jenis Kelamin</label>
+            <select>
+              <option>Jantan</option>
+              <option>Betina</option>
+            </select>
+          </div>
+          <div class="field"><label>Warna / Ciri Khas</label><input type="text" placeholder="Contoh: Putih belang coklat"></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-head">
-          <h3 class="card-title">Daftar Pasien Terdaftar</h3>
-          <a href="tambah-pasien.html" class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Tambah Pasien</a>
+        <div class="card-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><h3 class="card-title">Informasi Pemilik</h3></div>
+        <div class="form-grid">
+          <div class="field"><label>Cari Pemilik Terdaftar</label><input type="text" placeholder="Ketik nama atau No. HP pemilik"></div>
+          <div style="display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:12px;">Atau daftar pemilik baru</div>
+          <div class="field"><label>Nama Pemilik Baru</label><input type="text" placeholder="Nama lengkap pemilik"></div>
+          <div class="field"><label>No. HP / WhatsApp</label><input type="tel" placeholder="08xxxxxxxxxx"></div>
+          <div class="field" style="grid-column:1/-1;"><label>Alamat</label><textarea placeholder="Alamat lengkap pemilik" rows="2" style="width:100%; padding:10px; border:1.5px solid var(--border); border-radius:10px; font-size:13px; background:var(--bg); outline:none; font-family:inherit;"></textarea></div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Hewan & Pemilik</th>
-              <th>Jenis / Ras</th>
-              <th>Status Vaksin</th>
-              <th>Terakhir</th>
-              <th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div style="font-weight:700">Luna</div><div style="font-size:11px;color:var(--muted)">Siti Rahayu</div></td>
-              <td>Kucing · Persia</td>
-              <td><span class="badge b-red">Terlambat</span></td>
-              <td>5 Mar</td>
-              <td><button class="btn btn-outline btn-sm">Detail</button></td>
-            </tr>
-            <tr>
-              <td><div style="font-weight:700">Buddy</div><div style="font-size:11px;color:var(--muted)">Rudi Santoso</div></td>
-              <td>Anjing · Golden</td>
-              <td><span class="badge b-green">Aman</span></td>
-              <td>10 Mar</td>
-              <td><button class="btn btn-outline btn-sm">Detail</button></td>
-            </tr>
-          </tbody>
-        </table>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:12px; margin-top:10px;">
+        <a href="manajemen-pasien.html" class="btn btn-outline">Batal</a>
+        <button class="btn btn-primary" onclick="HappyPaws.showToast('Pasien berhasil ditambahkan!', 'success'); setTimeout(()=>location.href='manajemen-pasien.html', 1500)">Simpan Pasien Baru</button>
       </div>
     </div>
   </main>

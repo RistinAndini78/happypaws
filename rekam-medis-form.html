@@ -15,20 +15,28 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
 
-.sidebar{width:260px;background:var(--ink);color:#fff;display:flex;flex-direction:column;position:fixed;height:100vh;top:0;left:0;z-index:100;}
-.sb-logo{padding:20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,0.05);}
-.sb-logo-box{width:36px;height:36px;background:linear-gradient(135deg,var(--sc),var(--pr));border-radius:10px;display:flex;align-items:center;justify-content:center;}
-.sb-logo-name{font-weight:700;font-size:16px;}
-.sb-nav{flex:1;padding:20px 10px;}
-.ni{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;color:rgba(255,255,255,0.6);text-decoration:none;margin-bottom:4px;transition:all 0.2s;}
-.ni:hover{background:rgba(255,255,255,0.05);color:#fff;}
-.ni.active{background:rgba(142,82,252,0.15);color:var(--pr-pale);font-weight:600;}
-
+.sidebar{width:260px;height:100vh;background:var(--ink);position:fixed;top:0;left:0;display:flex;flex-direction:column;z-index:100;}
 .main-content{margin-left:260px;flex:1;display:flex;flex-direction:column;}
+
+/* STANDARD SIDEBAR STYLES */
+.sb-logo{padding:20px 18px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;}
+.sb-logo-box{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--sc),var(--pr));display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;}
+.sb-logo-name{font-weight:700;font-size:14px;color:#fff;}
+.sb-logo-sub{font-size:9px;color:var(--sc);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+.sb-nav{flex:1;padding:8px 10px;overflow-y:auto;}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,.62);text-decoration:none;font-size:13px;font-weight:500;margin-bottom:2px;border:1px solid transparent;transition:all .18s;cursor:pointer;}
+.ni:hover{background:rgba(255,255,255,.07);color:rgba(255,255,255,.9);}
+.ni.active{background:rgba(142,82,252,0.15);color:var(--pr-pale);border-color:rgba(142,82,252,0.2);font-weight:600;}
+.ni svg{flex-shrink:0;width:17px;height:17px;}
+.sb-user{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;margin-top:auto;}
+.sb-ava{width:34px;height:34px;border-radius:10px;background:var(--pr-pale);display:flex;align-items:center;justify-content:center;color:var(--pr);flex-shrink:0;}
+.sb-uname{font-size:12px;font-weight:600;color:#fff;}
+.sb-urole{font-size:10px;color:var(--sc);}
+/* ... rest of existing styles ... */
 .topbar{height:64px;background:#fff;border-bottom:1.5px solid var(--border);padding:0 30px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
 .tb-title{font-weight:700;font-size:18px;}
 
-.content{padding:30px;}
+.content{padding:24px 28px;}
 .form-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;}
 .card{background:#fff;border-radius:20px;border:1.5px solid var(--border);padding:24px;box-shadow:0 4px 20px rgba(142,82,252,0.03);}
 .card-title{font-size:16px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:8px;color:var(--pr);}
@@ -54,26 +62,27 @@ body{background:var(--bg);color:var(--text);display:flex;min-height:100vh;}
 </head>
 <body>
 <aside class="sidebar" id="sidebar">
-<div class="sb-logo">
-  <div class="sb-logo-box" style="background:linear-gradient(135deg,var(--sc),var(--pr));"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 3.33-1 4.5s3.24.5 4.5-1M19.5 16.5c1.5 1.26 2 3.33 1 4.5s-3.24.5-4.5-1M12 18c-2.5 0-4.5 2-4.5 4.5S9.5 27 12 27s4.5-2 4.5-4.5S14.5 18 12 18z"/><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="11" r="3"/></svg></div>
-  <div><div class="sb-logo-name" style="color:#fff;font-weight:700;">PetCare</div><div class="sb-logo-sub" style="color:var(--sc);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-top:2px;">Smart Clinic</div></div>
-</div>
-<div class="sb-nav">
-  <a href="beranda-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Beranda</a>
-  <a href="manajemen-pasien.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Manajemen Pasien</a>
-  <a href="rekam-medis-admin.html" class="ni active" style="background:rgba(142,82,252,0.15);color:var(--pr-pale);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Riwayat Medis</a>
-  <a href="data-pemilik.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Data Pemilik</a>
-  <a href="stok-vaksin-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5l10-10a4.95 4.95 0 0 0 0-7 4.95 4.95 0 0 0-7 0l-10 10a4.95 4.95 0 0 0 0 7 4.95 4.95 0 0 0 7 0z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg> Stok Vaksin</a>
-  <a href="reminder-ai.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Reminder AI</a>
-  <a href="pengaturan-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Pengaturan</a>
-</div>
-<div class="sb-user" style="padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px;margin-top:auto">
-  <div style="display:flex;align-items:center;gap:10px;">
-    <div class="sb-ava" style="width:34px;height:34px;border-radius:10px;background:var(--pr-pale);display:flex;align-items:center;justify-content:center;color:var(--pr);flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-    <div><div class="sb-uname" id="side-name" style="font-size:12px;font-weight:600;color:#fff;">drh. Andi Pratama</div><div class="sb-urole" id="side-role" style="font-size:10px;color:var(--sc);">Admin Utama</div></div>
+  <div class="sb-logo">
+    <div class="sb-logo-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 3.33-1 4.5s3.24.5 4.5-1M19.5 16.5c1.5 1.26 2 3.33 1 4.5s-3.24.5-4.5-1M12 18c-2.5 0-4.5 2-4.5 4.5S9.5 27 12 27s4.5-2 4.5-4.5S14.5 18 12 18z"/><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="12" cy="11" r="3"/></svg></div>
+    <div><div class="sb-logo-name">PetCare</div><div class="sb-logo-sub">Smart Clinic</div></div>
   </div>
-  <a href="index.html" style="color:var(--red);margin-left:auto;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
-</div></aside>
+  <div class="sb-nav">
+    <a href="beranda-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Beranda</a>
+    <a href="manajemen-pasien.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Manajemen Pasien</a>
+    <a href="rekam-medis-admin.html" class="ni active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Riwayat Medis</a>
+    <a href="data-pemilik.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg> Data Pemilik</a>
+    <a href="stok-vaksin-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.5 20.5l10-10a4.95 4.95 0 0 0 0-7 4.95 4.95 0 0 0-7 0l-10 10a4.95 4.95 0 0 0 0 7 4.95 4.95 0 0 0 7 0z"/><line x1="8.5" y1="8.5" x2="15.5" y2="15.5"/></svg> Stok Vaksin</a>
+    <a href="reminder-ai.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Reminder AI</a>
+    <a href="pengaturan-admin.html" class="ni"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> Pengaturan</a>
+  </div>
+  <div class="sb-user">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div class="sb-ava" style="width:34px;height:34px;border-radius:10px;background:var(--pr-pale);display:flex;align-items:center;justify-content:center;color:var(--pr);flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <div><div class="sb-uname" id="side-name">drh. Andi Pratama</div><div class="sb-urole" id="side-role">Admin Utama</div></div>
+    </div>
+    <a href="index.html" style="color:var(--red);margin-left:auto;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+  </div>
+</aside>
 
 <main class="main-content">
   <div class="topbar">
