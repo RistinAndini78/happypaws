@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>PetCare — Tambah Staf</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+:root{--pr:#8e52fc;--sc:#d463f2;--pr-pale:#f4eeff;--ink:#0f0a1a;--muted:#6b5a8a;--border:#e8d9ff;--bg:#f9f6ff;--white:#fff;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:var(--bg);}
+.main-form{padding:24px 28px;max-width:600px;margin:0 auto;}
+.top-nav{height:64px;background:var(--white);border-bottom:1.5px solid var(--border);padding:0 28px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;}
+.back-btn{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);text-decoration:none;}
+.card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:24px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:12px;font-weight:700;margin-bottom:6px;color:var(--muted);}
+.field input, .field select{width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;background:var(--bg);outline:none;}
+.btn-primary{width:100%;background:var(--pr);color:#fff;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-top:20px;}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <a href="pengaturan-staf.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="20"><polyline points="15 18 9 12 15 6"/></svg></a>
+  <div><h1 style="font-size:16px; font-weight:700; color:var(--ink);">Tambah Staf Baru</h1></div>
+</nav>
+
+<main class="main-form">
+  <div class="card">
+    <div class="field"><label>Nama Lengkap</label><input type="text" placeholder="Masukkan nama staf"></div>
+    <div class="field"><label>Email Staf</label><input type="email" placeholder="email@happypaws.id"></div>
+    <div class="field">
+      <label>Peran / Jabatan</label>
+      <select>
+        <option>Dokter Klinik</option>
+        <option>Resepsionis</option>
+        <option>Perawat Hewan</option>
+      </select>
+    </div>
+    <div class="field"><label>Password Awal</label><input type="password" placeholder="********"></div>
+    <button class="btn-primary" onclick="HappyPaws.showToast('Staf berhasil ditambahkan'); location.href='pengaturan-staf.html'">Simpan Data Staf</button>
+  </div>
+</main>
+<script src="shared.js"></script>
+</body>
+</html>

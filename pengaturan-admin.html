@@ -45,7 +45,7 @@ html,body{width:100%;min-height:100%;background:var(--bg);}
 /* SETTINGS UI */
 .settings-grid{display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:start;}
 .side-menu-card{background:var(--white);border-radius:16px;border:1.5px solid var(--border);padding:8px;position:sticky;top:84px;}
-.sm-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;color:var(--muted);font-weight:700;font-size:13px;transition:all .2s;margin-bottom:4px;border:1.5px solid transparent;}
+.sm-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;color:var(--muted);font-weight:700;font-size:13px;transition:all .2s;margin-bottom:4px;border:1.5px solid transparent;text-decoration:none;}
 .sm-item:hover{background:var(--pr-pale);color:var(--pr);}
 .sm-item.active{background:var(--pr-pale);color:var(--pr);border-color:var(--border);}
 
@@ -120,13 +120,13 @@ td{padding:12px 14px;font-size:13px;border-bottom:1px solid var(--border);}
     <div class="content">
       <div class="settings-grid">
         <div class="side-menu-card">
-          <div class="sm-item active" onclick="switchTab('profil', this)"><span>Profil Klinik</span></div>
-          <div class="sm-item" onclick="switchTab('jam', this)"><span>Jam Operasional</span></div>
-          <div class="sm-item" onclick="switchTab('staf', this)"><span>Manajemen Staf</span></div>
-          <div class="sm-item" onclick="switchTab('notif', this)"><span>Notifikasi</span></div>
-          <div class="sm-item" onclick="switchTab('integ', this)"><span>Integrasi</span></div>
-          <div class="sm-item" onclick="switchTab('akun', this)"><span>Akun Saya</span></div>
-          <div class="sm-item" onclick="switchTab('keamanan', this)"><span>Keamanan</span></div>
+          <a href="pengaturan-admin.html" class="sm-item active">Profil Klinik</a>
+          <a href="pengaturan-operasional.html" class="sm-item">Jam Operasional</a>
+          <a href="pengaturan-staf.html" class="sm-item">Manajemen Staf</a>
+          <a href="pengaturan-notifikasi.html" class="sm-item">Notifikasi</a>
+          <a href="pengaturan-integrasi.html" class="sm-item">Integrasi</a>
+          <a href="pengaturan-akun.html" class="sm-item">Akun Saya</a>
+          <a href="pengaturan-keamanan.html" class="sm-item">Keamanan</a>
         </div>
 
         <div id="settings-panels">
@@ -144,12 +144,6 @@ td{padding:12px 14px;font-size:13px;border-bottom:1px solid var(--border);}
               </div>
             </div>
           </div>
-          <div id="panel-jam" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Jam Operasional</h3></div><div style="padding:20px;"><div style="display:flex; justify-content:space-between; padding:12px; background:var(--bg); border-radius:12px; margin-bottom:8px;"><span>Senin - Jumat</span><b>08:00 - 20:00</b></div><button class="btn btn-primary" onclick="HappyPaws.showToast('Jadwal diperbarui')">Update Jadwal</button></div></div></div>
-          <div id="panel-staf" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Manajemen Staf</h3></div><table style="width:100%"><thead><tr><th>Nama</th><th>Peran</th></tr></thead><tbody><tr><td>drh. Budi</td><td>Dokter Klinik</td></tr></tbody></table></div></div>
-          <div id="panel-notif" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Notifikasi</h3></div><div style="padding:20px;"><div style="display:flex; justify-content:space-between; align-items:center;"><b>Reminder Vaksin</b><div class="toggle on" onclick="this.classList.toggle('on'); this.classList.toggle('off')"><div class="toggle-knob"></div></div></div></div></div></div>
-          <div id="panel-integ" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Integrasi</h3></div><div style="padding:24px;"><b>WhatsApp Business API</b><p style="font-size:12px; color:var(--muted); margin:8px 0;">Terhubung</p></div></div></div>
-          <div id="panel-akun" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Akun</h3></div><div style="padding:24px;"><div class="field"><label>Email</label><input type="email" value="budi.hp@happypaws.id"></div></div></div></div>
-          <div id="panel-keamanan" class="settings-panel" style="display:none;"><div class="card"><div class="card-head"><h3 class="card-title">Keamanan</h3></div><div style="padding:24px;"><button class="btn btn-primary">Ganti Password</button></div></div></div>
         </div>
       </div>
     </div>
@@ -158,12 +152,12 @@ td{padding:12px 14px;font-size:13px;border-bottom:1px solid var(--border);}
 
 <script src="shared.js"></script>
 <script>
-function switchTab(id, el) {
-    document.querySelectorAll('.settings-panel').forEach(p => p.style.display = 'none');
-    document.getElementById('panel-' + id).style.display = 'block';
-    document.querySelectorAll('.sm-item').forEach(i => i.classList.remove('active'));
-    el.classList.add('active');
-}
+document.addEventListener('click',function(e){
+  var sb=document.getElementById('sidebar');
+  if(sb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!e.target.closest('.hamburger'))
+    sb.classList.remove('open');
+});
+</script>
 document.addEventListener('click',function(e){
   var sb=document.getElementById('sidebar');
   if(sb&&sb.classList.contains('open')&&!sb.contains(e.target)&&!e.target.closest('.hamburger'))
