@@ -59,7 +59,14 @@ html,body{width:100%;min-height:100%;background:var(--bg);}
   .sidebar.open{transform:translateX(0);}
   .main-admin{margin-left:0;}
   .form-grid{grid-template-columns:1fr;}
+  .upload-zone{height:140px!important;}
 }
+.upload-zone{width:100%;height:180px;border:2px dashed var(--border);border-radius:16px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;transition:all .2s;color:var(--muted);position:relative;overflow:hidden;}
+.upload-zone:hover{border-color:var(--pr);background:var(--pr-pale);color:var(--pr);}
+.upload-zone svg{width:32px;height:32px;opacity:.6;}
+.upload-label{font-size:13px;font-weight:600;}
+.upload-sub{font-size:11px;opacity:.7;}
+.wajib-badge{background:var(--red);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px;text-transform:uppercase;margin-left:6px;font-weight:800;vertical-align:middle;}
 </style>
 </head>
 <body>
@@ -99,6 +106,15 @@ html,body{width:100%;min-height:100%;background:var(--bg);}
     <div class="content">
       <div class="card">
         <div class="card-head"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--pr)" stroke-width="2.5"><path d="M12 5C7.58 5 4 8.13 4 12c0 3.87 3.58 7 8 7s8-3.13 8-7c0-3.87-3.58-7-8-7z"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg><h3 class="card-title">Informasi Hewan</h3></div>
+        <div style="padding:24px 24px 0;">
+          <label style="display:block;font-size:12px;font-weight:700;margin-bottom:8px;color:var(--muted);">FOTO HEWAN <span class="wajib-badge">WAJIB</span></label>
+          <div class="upload-zone" onclick="this.querySelector('input').click()">
+            <input type="file" style="display:none;" accept="image/*" onchange="const f=this.files[0]; if(f){ const r=new FileReader(); r.onload=e=>{ this.parentElement.style.background='url('+e.target.result+') center/cover'; this.parentElement.innerHTML=''; }; r.readAsDataURL(f); }">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <div class="upload-label">Klik untuk unggah foto</div>
+            <div class="upload-sub">Format JPG, PNG (Maks 5MB)</div>
+          </div>
+        </div>
         <div class="form-grid">
           <div class="field"><label>Nama Hewan</label><input type="text" placeholder="Masukkan nama hewan"></div>
           <div class="field"><label>Jenis Hewan</label>
