@@ -7,29 +7,36 @@
 <title>PetCare — Masuk Pemilik</title>
 <link rel="stylesheet" href="shared.css">
 <style>
-.app { justify-content:center; align-items:center; min-height:100vh; background:var(--bg); }
-.container { width:100%; max-width:400px; padding:24px; animation:fadeUp .6s ease both; }
+.app { justify-content:center; align-items:center; min-height:100vh; background:#fcfaff; padding: 20px; }
+.container { width:100%; max-width:380px; animation:fadeInUp .6s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .brand { text-align:center; margin-bottom:32px; }
-.logo-box { width:64px; height:64px; background:linear-gradient(135deg,var(--sc),var(--pr)); border-radius:20px; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; color:#fff; }
+.logo-box { width:60px; height:60px; background:var(--sc); border-radius:18px; display:flex; align-items:center; justify-content:center; margin:0 auto 12px; color:#fff; box-shadow: 0 8px 16px rgba(212, 99, 242, 0.2); }
 
-.form-card { background:#fff; border-radius:24px; padding:32px; border:1.5px solid var(--border); box-shadow:0 10px 40px rgba(212,99,242,0.06); }
-.title { font-size:22px; font-weight:800; color:var(--ink); margin-bottom:8px; text-align:center; }
-.desc { font-size:14px; color:var(--muted); text-align:center; margin-bottom:28px; }
+.form-card { background:#fff; border-radius:28px; padding:40px 32px; border:1.5px solid var(--border); box-shadow:0 15px 45px rgba(142, 82, 252, 0.04); }
+.title { font-size:24px; font-weight:900; color:var(--ink); margin-bottom:8px; text-align:center; }
+.desc { font-size:14px; color:var(--muted); text-align:center; margin-bottom:32px; font-weight: 500; }
 
-.btn-primary { background:linear-gradient(135deg, var(--sc), var(--pr)); margin-top:12px; }
-.register-link { text-align:center; margin-top:20px; font-size:13px; color:var(--muted); }
-.register-link a { color:var(--sc); font-weight:700; text-decoration:none; }
+.btn-primary { background:linear-gradient(135deg, #d463f2, #8e52fc); margin-top:12px; padding: 16px; border-radius: 14px; font-size: 15px; font-weight: 700; box-shadow: 0 10px 25px rgba(212, 99, 242, 0.3); border: none; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212, 99, 242, 0.4); }
+.btn-primary:active { transform: scale(0.98); }
+
+.register-link { text-align:center; margin-top:24px; font-size:13px; color:var(--muted); font-weight: 600; }
+.register-link a { color:var(--sc); font-weight:800; text-decoration:none; }
+
+.divider { height: 1px; background: var(--border); margin: 24px 0; opacity: 0.6; }
+.footer-link { text-align:center; font-size:12px; color:var(--muted); font-weight: 600; }
+.footer-link a { color:var(--sc); font-weight:800; text-decoration:none; }
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="container">
+  <div class="container text-center">
     <div class="brand">
       <div class="logo-box">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
-      <div style="font-family:'Nunito',sans-serif;font-size:24px;font-weight:900;color:var(--sc);">PetCare</div>
-      <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:2px;">Owner Portal</div>
+      <div style="font-family:'Poppins',sans-serif;font-size:24px;font-weight:800;color:var(--sc);letter-spacing:-0.5px;">PetCare</div>
+      <div style="font-size:11px;font-weight:800;color:var(--ink);text-transform:uppercase;letter-spacing:2px;margin-top:2px;">Owner Portal</div>
     </div>
 
     <div class="form-card">
@@ -40,7 +47,9 @@
         <label>Nomor WhatsApp</label>
         <div class="input-wrap">
           <input type="tel" placeholder="081234567890" id="wa">
-          <span class="input-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.24 9.77a19.79 19.79 0 0 1-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L6.91 9.14a16 16 0 006.95 6.95l1.41-1.41a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+          <span class="input-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 3.24 9.77a19.79 19.79 0 0 1-3.07-8.67A2 2 0 012.18 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L6.91 9.14a16 16 0 006.95 6.95l1.41-1.41a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
         </div>
       </div>
 
@@ -48,21 +57,25 @@
         <label>Password</label>
         <div class="input-wrap">
           <input type="password" placeholder="Masukkan password" id="pass">
-          <span class="input-icon" onclick="togglePass('pass')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></span>
+          <span class="input-icon" onclick="togglePass('pass')">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </span>
         </div>
       </div>
 
       <button class="btn-primary" onclick="login()">
-        Masuk
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <span>Masuk</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
 
       <div class="register-link">
         Belum aktivasi? <a href="aktivasi.html">Klik di sini</a>
       </div>
 
-      <div style="text-align:center;border-top:1px solid var(--border);margin-top:20px;padding-top:20px;font-size:12px;color:var(--muted);">
-        Staf Klinik? <a href="login.html" style="color:var(--sc);font-weight:700;text-decoration:none;">Masuk Dashboard</a>
+      <div class="divider"></div>
+
+      <div class="footer-link">
+        Staf Klinik? <a href="login.html">Masuk Dashboard</a>
       </div>
     </div>
   </div>
